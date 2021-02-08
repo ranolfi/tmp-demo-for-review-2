@@ -1,0 +1,3 @@
+Scaffold-DbContext -Project "Rcfc.WebApplication" -StartupProject "Rcfc.WebApplication" -Connection "Name=Postgres_Rcfc" -Provider "Npgsql.EntityFrameworkCore.PostgreSQL" -OutputDir "../Rcfc.Domain/EntityModels" -ContextDir "../Rcfc.DataPersistence/DataSources/Postgres_Rcfc" -Namespace "Rcfc.Domain.EntityModels" -ContextNamespace "Rcfc.DataPersistence.DataSources.Postgres_Rcfc" -Context "EntityFrameworkContext"
+
+(opt) -DataAnnotations

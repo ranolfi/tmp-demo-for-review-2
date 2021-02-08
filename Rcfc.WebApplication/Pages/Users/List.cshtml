@@ -1,0 +1,15 @@
+﻿@page
+@model Rcfc.WebApplication.Pages.Users.ListModel
+<strong>Test</strong>
+<br>
+@{
+    @: <strong>Test2</strong>
+    @: <br>
+
+
+    foreach (var user in Model.AllUsers)
+    {
+        @(user.AspNetIdentityUser.Email);
+        @: <br>
+    }
+}
