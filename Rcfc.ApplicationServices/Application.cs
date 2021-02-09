@@ -18,26 +18,26 @@ namespace Rcfc.ApplicationServices
     {
         private const string MainDbEFConnectionStringName = "Postgres_Rcfc";
 
-        public static void RegisterServices(IServiceCollection diServices)
+        public static void RegisterServices(IServiceCollection services)
         {
             // TODO: Use MediatR
 
-            diServices.AddScoped<UserService>();
+            services.AddScoped<UserService>();
         }
 
         // TODO: register repository instead of DbContext?
         // TODO: Make sure this method is not called for pages that don't need to query the DB
-        public static void RegisterDbContext(IServiceCollection diServices)
+        public static void RegisterDbContext(IServiceCollection services)
         {
             
         }
 
-        public static IServiceCollection RegisterDataRepositories(IServiceCollection diServices)
+        public static IServiceCollection RegisterDataRepositories(IServiceCollection services)
         {
-            return diServices.AddScoped<IUserRepository, UserRepository>(serviceProvider =>
+            return services.AddScoped<IUserRepository, UserRepository>(serviceProvider =>
                 { 
                     IConfiguration configuration = GetConfiguration();
-                    diServices.AddDbContext<EntityFrameworkContext>(options =>
+                    services.AddDbContext<EntityFrameworkContext>(options =>
                     options.UseNpgsql( configuration.GetConnectionString(MainDbEFConnectionStringName) )
                     );
                     EntityFrameworkContext dbContext = serviceProvider.GetRequiredService<EntityFrameworkContext>();
@@ -46,12 +46,12 @@ namespace Rcfc.ApplicationServices
             );
         }
 
-        public static IServiceCollection RegisterDataContext (IServiceCollection diServices)
+        public static IServiceCollection RegisterDataContext (IServiceCollection services)
         {
-            return diServices.AddScoped<IDataContext, DataContext>(serviceProvider =>
+            return services.AddScoped<IDataContext, DataContext>(serviceProvider =>
                 { 
                     IConfiguration configuration = GetConfiguration();
-                    diServices.AddDbContext<EntityFrameworkContext>(options =>
+                    services.AddDbContext<EntityFrameworkContext>(options =>
                     options.UseNpgsql( configuration.GetConnectionString(MainDbEFConnectionStringName) )
                     );
                     EntityFrameworkContext dbContext = serviceProvider.GetRequiredService<EntityFrameworkContext>();
